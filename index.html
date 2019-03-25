@@ -2,12 +2,16 @@
 layout: presentation
 ---
 
-{% for post in site.posts reversed %}
-	{% include slide.html %}
+{% for slide in site.slides reversed %}
+	<section {% if slide.slide-id %}id="{{slide.slide-id}}"{%endif %} class="step{%if slide.classes | size %}{% for class in slide.classes %} {{class}}{% endfor %}{% else %} slide{% endif %}" {% unless site.simple-slideshow %}{% for attr in slide.data %} data-{{attr[0]}}="{{attr[1]}}"{% endfor %}{% endunless %}>
+		{% if slide.title != "" %}<h1>{{ slide.title }}</h1>{% endif %}
+
+		{{ slide.content }}
+	</section>
 	<div class="page-break"></div>
 {% endfor %}
 {% unless site.simple-slideshow %}
-{% if site.overview %}
-<section id="overview" class="step" {% for attr in site.overview-data %} data-{{attr[0]}}="{{attr[1]}}"{% endfor %}></section>
-{% endif %}
+	{% if site.overview %}
+	<section id="overview" class="step" {% for attr in site.overview-data %} data-{{attr[0]}}="{{attr[1]}}"{% endfor %}></section>
+	{% endif %}
 {% endunless %}
