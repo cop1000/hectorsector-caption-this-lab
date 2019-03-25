@@ -117,3 +117,5 @@ exclude: [
 
 collections:
   - slides
+
+encoding: UTF-8
